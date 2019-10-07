@@ -1,4 +1,6 @@
 # Azure policies
+https://docs.microsoft.com/en-us/azure/governance/policy/samples/
+
 ### DateTags
 Set creation and expiration date tags to resource and resource groups.
 
