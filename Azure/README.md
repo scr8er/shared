@@ -1,3 +1,7 @@
+## Azlogin
+```powershell
+Connect-AzAccount -Credential (Get-Credential)
+```
 # Deployment
 Powershell and resource manager deployments and tools.
 
@@ -15,12 +19,6 @@ Policies deployed in Azure.
 
 # RBAC
 Custom roles created.
-
-## Azlogin
-```powershell
-Connect-AzAccount -Credential (Get-Credential)
-```
-
 
 ## Get-AzRRules
 Fast way to find ARM resource provider operations from an excel file while working on RBAC. Requires psexcel module.
