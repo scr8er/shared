@@ -1,2 +1,3 @@
 # shared-deployments
 Azure
+test
