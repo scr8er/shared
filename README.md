@@ -1,3 +1,1 @@
-# shared-deployments
-Azure
-test
+# shared
