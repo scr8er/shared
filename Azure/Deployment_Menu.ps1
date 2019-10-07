@@ -19,7 +19,7 @@ Function MenuInicial {
             }
             '2' {
                 $NewResourceGroupName = Read-Host "Introduce un nombre para el nuevo grupo de recursos. RG_****_???"
-                New-VerisureResourceGroup -NewResourceGroupName $NewResourceGroupName
+                New-ResourceGroup -NewResourceGroupName $NewResourceGroupName
             }
             '3' {
                 New-SubsResources -DeployFilePath 'C:\VSCode Workspace\Workspace #1\Deployments\deploy.ps1' -TemplatePath 'C:\VSCode Workspace\Workspace #1\Deployments\Templates'
@@ -36,7 +36,7 @@ Function MenuInicial {
 }
 Function New-AzLogin {
     begin {
-        $credential = Get-Credential -username "adm_jesus.gcasanova@verisure.onmicrosoft.com" -Message "Credenciales Azure PS Login"
+        $credential = Get-Credential -Message "Credenciales Azure PS Login"
     }
     Process {
         try {
@@ -76,7 +76,7 @@ Function Set-AzureContext {
         Write-Host "Contexto modificado correctamente." -ForegroundColor Green
     }
 }
-Function New-VerisureResourceGroup {
+Function New-ResourceGroup {
     Param(
         [Parameter(Mandatory = $true, ValueFromPipeline = $true)] [String] [ValidatePattern("RG_\w{3,15}_[A-Z][A-Z][A-Z]")] $NewResourceGroupName,
         [Parameter(Mandatory = $true)] [String] [ValidateSet("westeurope", "northeurope")] $location
@@ -126,7 +126,7 @@ Function New-SubscriptionResources {
         else {
             Write-Host "El grupo de recursos no existe. Creando el grupo de recursos $InputRG`n"
             [string]$location = Read-Host "Introduce la localizacion del grupo de recursos (westeurope o northeurope).`n"
-            New-VerisureResourceGroup -NewResourceGroupName $InputRG -location $location
+            New-ResourceGroup -NewResourceGroupName $InputRG -location $location
             $TargetRG = $InputRG
         }
         $template = '{

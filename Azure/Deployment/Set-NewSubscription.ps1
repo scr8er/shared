@@ -21,7 +21,7 @@ $DebugColor = "Blue" #Texto debug resaltado en este color (no es válido ni rojo
 $VMNicName = "aztestconnect01v" + (Get-Random(9999))
 $VMDiskName = "aztestconnect01d" + (Get-Random(9999))
 $VMCredential = Get-Credential -UserName "patrol" -Message "Password necesario para el usuario de la VM aztestconnect. Por defecto Patrol."
-$MailCredentials = Get-Credential -Message "Introduce las credenciales para el envio del mail (usuario@securitasdirect.es)."
+$MailCredentials = Get-Credential -Message "Introduce las credenciales para el envio del mail ()."
 
 
 $WarningPreference = 'SilentlyContinue' #Oculta los mensajes de Warning
@@ -129,14 +129,14 @@ $Subnet.NetworkSecurityGroup = $nsg2
 Set-AzVirtualNetwork -VirtualNetwork $VirtualNetwork
 
 # Auto Mail config.
-$From = "Sistemas_Windows@securitasdirect.es";
-$To = "Sistemas_Windows@securitasdirect.es";
+$From = "";
+$To = "";
 #$Cc = "jgcasanova@sidertia.com";
 $MailSubject = "Nueva subscripcion en Azure: " + $Subscription.name;
-$MailBody = @($MailSubject, "`nEs necesario notificar al departamento de comunicaciones para que autoricen el trafico entre Pozuelo/Yecora y la red: ", $Subscription.NetworkAddress, "`nLa VM generada para monitorizar el trafico tiene la siguiente direccion IP: ", (Get-AzNetworkInterface -name $VmNicName).IPConfigurations.PrivateIpAddress, "Lista de recursos:", (Get-AzResource | Select-Object name, resourcetype, location | Format-Table *), "`nEsto es un correo automatico, por favor, no responda a este mensaje.");
+$MailBody = @($MailSubject, "`n", $Subscription.NetworkAddress, "`n", (Get-AzNetworkInterface -name $VmNicName).IPConfigurations.PrivateIpAddress, "", (Get-AzResource | Select-Object name, resourcetype, location | Format-Table *), "`n");
 $Body = $MailBody | Out-String;
 $Attachment = (Get-ChildItem WO*.log).Fullname;
-$SMTPServer = "smtprelay.securitasdirect.es";
+$SMTPServer = "smtprelay";
 $SMTPPort = "25";
 
 # Registro de tiempo.
