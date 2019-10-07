@@ -1,0 +1,55 @@
+{
+    "mode": "All",
+    "policyRule": {
+        "if": {
+            "allOf": [
+                {
+                    "field": "type",
+                    "equals": "Microsoft.Network/networkSecurityGroups"
+                },
+                {
+                    "not": {
+                        "anyOf": [
+                            {
+                                "field": "name",
+                                "matchInsensitively": "[parameters('namePattern')]"
+                            },
+                            {
+                                "field": "name",
+                                "matchInsensitively": "NSG_...._???"
+                            },
+                            {
+                                "field": "name",
+                                "matchInsensitively": "NSG_....._???"
+                            },
+                            {
+                                "field": "name",
+                                "matchInsensitively": "NSG_......_???"
+                            },
+                            {
+                                "field": "name",
+                                "matchInsensitively": "NSG_......._???"
+                            },
+                            {
+                                "field": "name",
+                                "matchInsensitively": "NSG_........_???"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "then": {
+            "effect": "deny"
+        }
+    },
+    "parameters": {
+        "namePattern": {
+            "type": "String",
+            "metadata": {
+                "displayName": "namePattern",
+                "description": "Para la definición del patrón, utilice los siguientes caracteres.\\n< . > Equivalente a cualquier caracter.\\n< ? >Equivalente a cualquier letra.\\n< # >Equivalente a cualquier número."
+            }
+        }
+    }
+}

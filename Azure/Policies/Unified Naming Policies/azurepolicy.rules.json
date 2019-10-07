@@ -1,0 +1,1315 @@
+{
+    "if": {
+        "allOf": [
+            {
+                "not": {
+                    "anyOf": [
+                        {
+                            "allOf": [
+                                {
+                                    "field": "type",
+                                    "equals": "Microsoft.AnalysisServices/servers"
+                                },
+                                {
+                                    "anyOf": [
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "[parameters('namePattern')]"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "SAS_...._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "SAS_....._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "SAS_......_???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "SAS_......._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "SAS_........_???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "SAS_........._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "SAS_.........._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "SAS_..........._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "SAS_............_???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "SAS_............._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "SAS_.............._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "SAS_..............._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "like": "analysisservicespowerbi*"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "allOf": [
+                                {
+                                    "field": "type",
+                                    "equals": "Microsoft.Network/applicationGateways"
+                                },
+                                {
+                                    "anyOf": [
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "[parameters('namePattern')]"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "like": "AG_*"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "allOf": [
+                                {
+                                    "field": "type",
+                                    "equals": "Microsoft.Automation/automationAccounts"
+                                },
+                                {
+                                    "anyOf": [
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "[parameters('namePattern')]"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "AUTO-....-???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "AUTO-.....-???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "AUTO-......-???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "AUTO-.......-???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "AUTO-........-???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "AUTO-.........-???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "AUTO-..........-???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "AUTO-...........-???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "AUTO-............-???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "AUTO-............-???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "AUTO-.............-???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "AUTO-..............-???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "AUTO-...............-???"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "allOf": [
+                                {
+                                    "field": "type",
+                                    "equals": "Microsoft.Compute/availabilitySets"
+                                },
+                                {
+                                    "anyOf": [
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "[parameters('namePattern')]"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "AS_...._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "AS_....._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "AS_......_???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "AS_......._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "AS_........_???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "AS_........._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "AS_.........._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "AS_..........._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "AS_............_???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "AS_............._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "AS_.............._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "AS_..............._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "AS_................_???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "AS_................._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "AS_.................._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "like": "agentpool*"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "allOf": [
+                                {
+                                    "field": "type",
+                                    "equals": "Microsoft.Compute/VirtualMachines"
+                                },
+                                {
+                                    "anyOf": [
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "[parameters('namePattern')]"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "az....##"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "az.....##"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "az......##"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "az.......##"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "az........##"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "az.........##"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "az..........##"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "az...........##"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "az............##"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "az.............##"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "az...............##"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "az................##"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "az.................##"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "az..................##"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "az...................##"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "az....................##"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "like": "aks-agentpool*"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "allOf": [
+                                {
+                                    "field": "type",
+                                    "equals": "Microsoft.ContainerRegistry/registries"
+                                },
+                                {
+                                    "anyOf": [
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "[parameters('namePattern')]"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "CR_...._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "CR_....._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "CR_......_???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "CR_......._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "CR_........_???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "CR_........._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "CR_.........._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "CR_..........._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "CR_............_???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "CR_............._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "CR_.............._???"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "allOf": [
+                                {
+                                    "field": "type",
+                                    "equals": "Microsoft.ContainerService/managedClusters"
+                                },
+                                {
+                                    "anyOf": [
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "[parameters('namePattern')]"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "K8S_...._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "K8S_....._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "K8S_......_???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "K8S_......._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "K8S_........_???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "K8S_........._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "K8S_.........._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "K8S_..........._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "K8S_............_???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "K8S_............._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "K8S_.............._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "K8S_..............._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "K8S_................_???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "K8S_................._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "K8S_.................._???"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "allOf": [
+                                {
+                                    "field": "type",
+                                    "equals": "Microsoft.DataFactory/factories"
+                                },
+                                {
+                                    "anyOf": [
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "[parameters('namePattern')]"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "DF_....._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "DF_......_???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "DF_......._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "DF_........_???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "DF_........._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "DF_.........._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "DF_..........._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "DF_............_???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "DF_............._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "DF_.............._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "DF_..............._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "DF_................_???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "DF_................._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "DF_.................._???"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "allOf": [
+                                {
+                                    "field": "type",
+                                    "equals": "Microsoft.Network/connections"
+                                },
+                                {
+                                    "anyOf": [
+                                        {
+                                            "field": "name",
+                                            "like": "CON_VNG-ER_*"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "like": "CON_VNG-LNG_*"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "allOf": [
+                                {
+                                    "field": "type",
+                                    "equals": "Microsoft.Resources/subscriptions/resourceGroups"
+                                },
+                                {
+                                    "anyOf": [
+                                        {
+                                            "field": "name",
+                                            "like": "DefaultResourceGroup*"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "like": "networkwatcher*"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "like": "azurebackup*"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "like": "dashboard*"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "like": "MC_*"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "like": "cloud-shell*"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "RG_...._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "RG_....._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "RG_......_???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "RG_......._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "RG_........_???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "RG_........._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "RG_.........._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "RG_..........._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "RG_............_???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "RG_............._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "RG_.............._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "RG_..............._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "RG_................_???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "RG_................._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "RG_.................._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "RG_..................._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "RG_...................._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "RG_....................._???"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "allOf": [
+                                {
+                                    "field": "type",
+                                    "equals": "Microsoft.Network/loadBalancers"
+                                },
+                                {
+                                    "anyOf": [
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "[parameters('namePattern')]"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "kubernetes"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "kubernetes-internal"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "LB_....._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "LB_......_???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "LB_......._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "LB_........_???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "LB_........._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "LB_.........._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "LB_..........._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "LB_............_???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "LB_............._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "LB_.............._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "LB_..............._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "LB_................_???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "LB_................._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "LB_.................._???"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "allOf": [
+                                {
+                                    "field": "type",
+                                    "equals": "Microsoft.Network/localNetworkGateways"
+                                },
+                                {
+                                    "anyOf": [
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "[parameters('namePattern')]"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "like": "LNG_*"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "allOf": [
+                                {
+                                    "field": "type",
+                                    "equals": "Microsoft.Network/networkSecurityGroups"
+                                },
+                                {
+                                    "anyOf": [
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "[parameters('namePattern')]"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "aks-agentpool-########-nsg"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "NSG_....._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "NSG_......_???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "NSG_......._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "NSG_........_???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "NSG_........._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "NSG_.........._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "NSG_..........._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "NSG_............_???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "NSG_............._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "NSG_.............._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "NSG_..............._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "NSG_................_???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "NSG_................._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "NSG_.................._???"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "allOf": [
+                                {
+                                    "field": "type",
+                                    "equals": "Microsoft.Network/publicIPAddresses"
+                                },
+                                {
+                                    "anyOf": [
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "[parameters('namePattern')]"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "like": "PIP_*"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "allOf": [
+                                {
+                                    "field": "type",
+                                    "equals": "Microsoft.Network/VirtualNetworkGateways"
+                                },
+                                {
+                                    "anyOf": [
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "[parameters('namePattern')]"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "like": "VNG_*"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "allOf": [
+                                {
+                                    "field": "type",
+                                    "equals": "Microsoft.Network/virtualNetworks"
+                                },
+                                {
+                                    "anyOf": [
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "[parameters('namePattern')]"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "VN_....._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "VN_......_???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "VN_......._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "VN_........_???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "VN_........._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "VN_.........._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "VN_..........._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "VN_............_???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "VN_............._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "VN_.............._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "VN_..............._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "VN_................_???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "VN_................._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "VN_.................._???"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "allOf": [
+                                {
+                                    "field": "type",
+                                    "equals": "Microsoft.Network/virtualNetworks/subnets"
+                                },
+                                {
+                                    "anyOf": [
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "[parameters('namePattern')]"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "VLAN_....._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "VLAN_......_???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "VLAN_......._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "VLAN_........_???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "VLAN_........._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "VLAN_.........._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "VLAN_..........._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "VLAN_............_???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "VLAN_............._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "VLAN_.............._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "VLAN_..............._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "VLAN_................_???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "VLAN_................._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "VLAN_.................._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "GatewaySubnet"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "like": "*/GatewaySubnet"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "like": "default"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "allOf": [
+                                {
+                                    "field": "type",
+                                    "equals": "Microsoft.OperationalInsights/workspaces"
+                                },
+                                {
+                                    "anyOf": [
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "[parameters('namePattern')]"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "LAWS-.....-???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "LAWS-......-???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "LAWS-.......-???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "LAWS-........-???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "LAWS-.........-???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "LAWS-..........-???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "LAWS-...........-???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "LAWS-............-???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "LAWS-.............-???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "LAWS-..............-???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "LAWS-...............-???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "LAWS-................-???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "LAWS-.................-???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "LAWS-..................-???"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "allOf": [
+                                {
+                                    "field": "type",
+                                    "equals": "Microsoft.Storage/storageAccounts"
+                                },
+                                {
+                                    "anyOf": [
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "[parameters('namePattern')]"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "like": "sa*"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "allOf": [
+                                {
+                                    "field": "type",
+                                    "equals": "Microsoft.Web/sites"
+                                },
+                                {
+                                    "anyOf": [
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "[parameters('namePattern')]"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "FA_....._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "FA_......_???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "FA_......._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "FA_........_???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "FA_........._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "FA_.........._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "FA_..........._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "FA_............_???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "FA_............._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "FA_.............._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "FA_..............._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "FA_................_???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "FA_................._???"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "FA_.................._???"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "allOf": [
+                                {
+                                    "field": "type",
+                                    "equals": "Microsoft.Network/networkWatchers"
+                                },
+                                {
+                                    "anyOf": [
+                                        {
+                                            "field": "name",
+                                            "matchInsensitively": "[parameters('namePattern')]"
+                                        },
+                                        {
+                                            "field": "name",
+                                            "like": "networkwatcher*"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                "anyOf": [
+                    {
+                        "field": "type",
+                        "equals": "Microsoft.Resources/subscriptions/resourceGroups"
+                    },
+                    {
+                        "field": "type",
+                        "equals": "Microsoft.Network/virtualNetworks"
+                    },
+                    {
+                        "field": "type",
+                        "equals": "Microsoft.Compute/VirtualMachines"
+                    },
+                    {
+                        "field": "type",
+                        "equals": "Microsoft.Network/virtualNetworks/subnets"
+                    },
+                    {
+                        "field": "type",
+                        "equals": "Microsoft.Storage/storageAccounts"
+                    },
+                    {
+                        "field": "type",
+                        "equals": "Microsoft.Network/publicIPAddresses"
+                    },
+                    {
+                        "field": "type",
+                        "equals": "Microsoft.Network/networkSecurityGroups"
+                    },
+                    {
+                        "field": "type",
+                        "equals": "Microsoft.Network/loadBalancers"
+                    },
+                    {
+                        "field": "type",
+                        "equals": "Microsoft.ContainerService/managedClusters"
+                    },
+                    {
+                        "field": "type",
+                        "equals": "Microsoft.Web/sites"
+                    },
+                    {
+                        "field": "type",
+                        "equals": "Microsoft.ContainerRegistry/registries"
+                    },
+                    {
+                        "field": "type",
+                        "equals": "Microsoft.Compute/availabilitySets"
+                    },
+                    {
+                        "field": "type",
+                        "equals": "Microsoft.Network/applicationGateways"
+                    },
+                    {
+                        "field": "type",
+                        "equals": "Microsoft.DataFactory/factories"
+                    },
+                    {
+                        "field": "type",
+                        "equals": "Microsoft.AnalysisServices/servers"
+                    },
+                    {
+                        "field": "type",
+                        "equals": "Microsoft.Network/localNetworkGateways"
+                    },
+                    {
+                        "field": "type",
+                        "equals": "Microsoft.Network/VirtualNetworkGateways"
+                    },
+                    {
+                        "field": "type",
+                        "equals": "Microsoft.Network/connections"
+                    },
+                    {
+                        "field": "type",
+                        "equals": "Microsoft.Network/networkWatchers"
+                    },
+                    {
+                        "field": "type",
+                        "equals": "Microsoft.Automation/automationAccounts"
+                    },
+                    {
+                        "field": "type",
+                        "equals": "Microsoft.OperationalInsights/workspaces"
+                    }
+                ]
+            }
+        ]
+    },
+    "then": {
+        "effect": "audit"
+    }
+}

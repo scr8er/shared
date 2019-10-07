@@ -1,0 +1,123 @@
+{
+    "mode": "All",
+    "policyRule": {
+        "if": {
+            "allOf": [
+                {
+                    "field": "type",
+                    "equals": "Microsoft.Resources/subscriptions/resourceGroups"
+                },
+                {
+                    "anyOf": [
+                        {
+                            "not": {
+                                "allOf": [
+                                    {
+                                        "field": "tags.Owner",
+                                        "exists": "true"
+                                    },
+                                    {
+                                        "field": "tags.MaintenanceWindow",
+                                        "exists": "true"
+                                    },
+                                    {
+                                        "field": "tags.Service",
+                                        "exists": "true"
+                                    },
+                                    {
+                                        "field": "tags.TicketID",
+                                        "exists": "true"
+                                    },
+                                    {
+                                        "field": "tags.Environment",
+                                        "exists": "true"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "not": {
+                                "anyOf": [
+                                    {
+                                        "field": "tags.Owner",
+                                        "match": "IT Systems Windows"
+                                    },
+                                    {
+                                        "field": "tags.Owner",
+                                        "match": "IT Systems Linux"
+                                    },
+                                    {
+                                        "field": "tags.Owner",
+                                        "match": "BP Marketing and Sales"
+                                    },
+                                    {
+                                        "field": "tags.Owner",
+                                        "match": "Communications"
+                                    },
+                                    {
+                                        "field": "tags.Owner",
+                                        "match": "BI"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "not": {
+                                "anyOf": [
+                                    {
+                                        "field": "tags.TicketID",
+                                        "match": "WO#############"
+                                    },
+                                    {
+                                        "field": "tags.TicketID",
+                                        "match": "WO0000000000000"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "not": {
+                                "anyOf": [
+                                    {
+                                        "field": "tags.MaintenanceWindow",
+                                        "match": "##h-##h"
+                                    },
+                                    {
+                                        "field": "tags.MaintenanceWindow",
+                                        "like": "Not-Scheduled"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "not": {
+                                "anyOf": [
+                                    {
+                                        "field": "tags.Environment",
+                                        "match": "Development"
+                                    },
+                                    {
+                                        "field": "tags.Environment",
+                                        "match": "EPI"
+                                    },
+                                    {
+                                        "field": "tags.Environment",
+                                        "match": "Production"
+                                    },
+                                    {
+                                        "field": "tags.Environment",
+                                        "match": "Experimentation"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "then": {
+            "effect": "deny"
+        }
+    },
+    "parameters": {}
+}

@@ -1,0 +1,21 @@
+{
+    "mode": "All",
+    "policyRule": {
+        "if": {
+            "allOf": [
+                {
+                    "field": "type",
+                    "equals": "Microsoft.Resources/subscriptions/resourceGroups"
+                },
+                {
+                    "field": "tags.ExpirationDate",
+                    "less": "[utcNow()]"
+                }
+            ]
+        },
+        "then": {
+            "effect": "audit"
+        }
+    },
+    "parameters": {}
+}

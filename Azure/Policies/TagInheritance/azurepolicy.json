@@ -1,0 +1,95 @@
+{
+    "mode": "Indexed",
+    "policyRule": {
+        "if": {
+            "allOf": [
+                {
+                    "field": "tags.Owner",
+                    "exists": "false"
+                },
+                {
+                    "value": "[resourceGroup().tags.Owner]",
+                    "exists": "true"
+                },
+                {
+                    "value": "[resourceGroup().tags.Owner]",
+                    "notEquals": ""
+                },
+                {
+                    "field": "tags.MaintenanceWindow",
+                    "exists": "false"
+                },
+                {
+                    "value": "[resourceGroup().tags.MaintenanceWindow]",
+                    "exists": "true"
+                },
+                {
+                    "value": "[resourceGroup().tags.MaintenanceWindow]",
+                    "notEquals": ""
+                },
+                {
+                    "field": "tags.Environment",
+                    "exists": "false"
+                },
+                {
+                    "value": "[resourceGroup().tags.Environment]",
+                    "exists": "true"
+                },
+                {
+                    "value": "[resourceGroup().tags.Environment]",
+                    "notEquals": ""
+                },
+                {
+                    "field": "tags.Service",
+                    "exists": "false"
+                },
+                {
+                    "value": "[resourceGroup().tags.Service]",
+                    "exists": "true"
+                },
+                {
+                    "value": "[resourceGroup().tags.Service]",
+                    "notEquals": ""
+                },
+                {
+                    "field": "tags.TicketID",
+                    "exists": "false"
+                },
+                {
+                    "value": "[resourceGroup().tags.TicketID]",
+                    "exists": "true"
+                },
+                {
+                    "value": "[resourceGroup().tags.TicketID]",
+                    "notEquals": ""
+                }
+            ]
+        },
+        "then": {
+            "effect": "append",
+            "details": [
+                {
+                    "field": "tags.Owner",
+                    "value": "[resourceGroup().tags.Owner]"
+                },
+                {
+                    "field": "tags.MaintenanceWindow",
+                    "value": "[resourceGroup().tags.MaintenanceWindow]"
+                },
+                {
+                    "field": "tags.Environment",
+                    "value": "[resourceGroup().tags.Environment]"
+                },
+                {
+                    "field": "tags.Service",
+                    "value": "[resourceGroup().tags.Service]"
+                },
+                {
+                    "field": "tags.TicketID",
+                    "value": "[resourceGroup().tags.TicketID]"
+                }
+            ]
+        }
+    },
+    "parameters": {}
+}

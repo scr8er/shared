@@ -1,0 +1,26 @@
+{
+    "allOf": [
+        {
+            "field": "type",
+            "equals": "Microsoft.Network/applicationGateways"
+        },
+        {
+            "not": {
+                "anyOf": [
+                    {
+                        "field": "name",
+                        "matchInsensitively": "[parameters('namePattern')]"
+                    },
+                    {
+                        "field": "name",
+                        "matchInsensitively": "AG_*"
+                    }
+                ]
+            }
+        }
+    ]
+},
+"then": {
+    "effect": "deny"
+}
+}

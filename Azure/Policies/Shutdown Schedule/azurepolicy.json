@@ -1,0 +1,150 @@
+{
+    "mode": "All",
+    "policyRule": {
+        "if": {
+            "allOf": [
+                {
+                    "field": "type",
+                    "equals": "Microsoft.Compute/virtualMachines"
+                },
+                {
+                    "field": "tags.Environment",
+                    "notEquals": "Production"
+                }
+            ]
+        },
+        "then": {
+            "effect": "deployIfNotExists",
+            "details": {
+                "type": "Microsoft.DevTestLab/schedules",
+                "existenceCondition": {
+                    "allOf": [
+                        {
+                            "field": "Microsoft.DevTestLab/schedules/taskType",
+                            "equals": "ComputeVmShutdownTask"
+                        },
+                        {
+                            "field": "Microsoft.DevTestLab/schedules/targetResourceId",
+                            "equals": "[concat(resourceGroup().id,'/providers/Microsoft.Compute/virtualMachines/',field('name'))]"
+                        }
+                    ]
+                },
+                "roleDefinitionIds": [
+                    "/providers/microsoft.authorization/roleDefinitions/9980e02c-c2be-4d73-94e8-173b1dc7cf3c"
+                ],
+                "deployment": {
+                    "properties": {
+                        "mode": "incremental",
+                        "template": {
+                            "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+                            "contentVersion": "1.0.0.0",
+                            "parameters": {
+                                "vmName": {
+                                    "type": "string"
+                                },
+                                "location": {
+                                    "type": "string"
+                                },
+                                "time": {
+                                    "type": "string",
+                                    "defaultValue": "1800",
+                                    "metadata": {
+                                        "description": "Hora de la programación. (2300 = 11:00 PM)"
+                                    }
+                                },
+                                "timeZoneId": {
+                                    "type": "string",
+                                    "defaultValue": "Romance Standard Time",
+                                    "metadata": {
+                                        "description": "Zona horaria (En España Romance Standard Time)."
+                                    }
+                                }
+                            },
+                            "variables": {},
+                            "resources": [
+                                {
+                                    "name": "[concat('shutdown-computevm-',parameters('vmName'))]",
+                                    "type": "Microsoft.DevTestLab/schedules",
+                                    "location": "[parameters('location')]",
+                                    "apiVersion": "2018-09-15",
+                                    "properties": {
+                                        "status": "Enabled",
+                                        "taskType": "ComputeVmShutdownTask",
+                                        "dailyRecurrence": {
+                                            "time": "[parameters('time')]"
+                                        },
+                                        "timeZoneId": "[parameters('timeZoneId')]",
+                                        "notificationSettings": {
+                                            "status": "[parameters('EnableNotification')]",
+                                            "timeInMinutes": 30,
+                                            "notificationLocale": "en"
+                                        },
+                                        "targetResourceId": "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]"
+                                    }
+                                }
+                            ],
+                            "outputs": {}
+                        },
+                        "parameters": {
+                            "vmName": {
+                                "value": "[field('name')]"
+                            },
+                            "location": {
+                                "value": "[field('location')]"
+                            },
+                            "time": {
+                                "value": "[parameters('time')]"
+                            },
+                            "timeZoneId": {
+                                "value": "[parameters('timeZoneId')]"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "parameters": {
+        "time": {
+            "type": "String",
+            "metadata": {
+                "displayName": "Hora de la programación de apagado.",
+                "description": "Zona horaria (En España Romance Standard Time)."
+            },
+            "allowedValues": [
+                "0000",
+                "0100",
+                "0200",
+                "0300",
+                "0400",
+                "0500",
+                "0600",
+                "0700",
+                "0800",
+                "0900",
+                "1000",
+                "1200",
+                "1300",
+                "1400",
+                "1500",
+                "1600",
+                "1700",
+                "1800",
+                "1900",
+                "2000",
+                "2100",
+                "2200",
+                "2300"
+            ],
+            "defaultValue": "1800"
+        },
+        "timeZoneId": {
+            "type": "String",
+            "metadata": {
+                "displayName": "Zona horaria",
+                "description": "Zona horaria (En España Romance Standard Time)."
+            },
+            "defaultValue": "Romance Standard Time"
+        }
+    }
+}

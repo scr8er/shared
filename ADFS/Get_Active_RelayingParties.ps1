@@ -1,6 +1,6 @@
-﻿                                        # Control de tiempo
-                                        $Start = Get-Date
-                                        #
+﻿# Control de tiempo
+$Start = Get-Date
+#
 Function Set-RPNames {
 
     # Añadir el identificador encontrado y su RPName al hash de comparación.
@@ -70,6 +70,6 @@ foreach ($WinEvent in $WinEvents){
 remove-item .\RPS.txt
 Set-RPNames
 
-                                        # Control de tiempo
-                                        $Finish = Get-Date
-                                        New-Timespan -Start $Start -End $Finish
+# Control de tiempo
+$Finish = Get-Date
+New-Timespan -Start $Start -End $Finish
