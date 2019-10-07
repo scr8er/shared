@@ -2,7 +2,7 @@
 
 Welcome! I'm glad you are here.
 
-The main objective of this project is to share my work and knowledge, improve dev skills as the noob I am and become a little part of the community. 
+The main objective of this project is to share my work and knowledge, improve my development skills as the noob I am and become a little part of the community. 
 
 As a windows systems admin, I started to save every piece of powershell code I've built. Most of them belong to simple needs or sometimes more logical than technical issues.
 
