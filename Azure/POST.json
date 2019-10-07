@@ -1,0 +1,48 @@
+Content-Type:application/json
+Authorization:Bearer {
+    {jwtToken
+    }
+}
+AuthenticatedUser: {
+    {authenticatedUser
+    }
+}
+
+{
+    "countryCode": "NOR",
+    "source": "MARKETING",
+    "type": "RESIDENTIAL",
+    "subType": "B - OFFICE",
+    "areaSQM": 123,
+    "customer": {
+        "name": "Domingo",
+        "surname": "Perez",
+        "address": [
+            {
+                "type": "normalized",
+                "postalCode": "3728",
+                "countryCode": "NOR",
+                "countryName": "Norway"
+            }
+        ],
+        "contactData": [
+            {
+                "code": 1,
+                "type": "PHONE",
+                "value": "111222333",
+                "comercialContAllowed": true
+            },
+            {
+                "code": 2,
+                "type": "MAIL",
+                "value": "example@verisure.com",
+                "comercialContAllowed": false
+            }
+        ]
+    },
+    "origin": {
+        "value": "GDN",
+        "channel": "FormFunnel",
+        "pub": "GDN-Funnel-NY-nov"
+    }
+}

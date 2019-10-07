@@ -1,0 +1,80 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "VNGname": {
+            "type": "string"
+        },
+        "TargetRG": {
+            "type": "string"
+        },
+        "Resourcelocation": {
+            "type": "string"
+        },
+        "sku": {
+            "type": "string"
+        },
+        "gatewayType": {
+            "type": "string",
+            "defaultValue": "Vpn",
+            "allowedValues": [
+                "Vpn",
+                "ExpressRoute"
+            ]
+        },
+        "existingVirtualNetworkName": {
+            "type": "string"
+        },
+        "newSubnetName": {
+            "type": "string"
+        },
+        "subnetAddressPrefix": {
+            "type": "string"
+        },
+        "publicIpAddressId": {
+            "type": "string"
+        }
+    },
+    "resources": [
+        {
+            "apiVersion": "2019-02-01",
+            "name": "[parameters('VNGname')]",
+            "type": "Microsoft.Network/virtualNetworkGateways",
+            "location": "[parameters('Resourcelocation')]",
+            "dependsOn": [
+                "[concat('Microsoft.Network/virtualNetworks/', parameters('existingVirtualNetworkName'), '/subnets/GatewaySubnet')]"
+            ],
+            "tags": {},
+            "properties": {
+                "gatewayType": "[parameters('gatewayType')]",
+                "ipConfigurations": [
+                    {
+                        "name": "default",
+                        "properties": {
+                            "privateIPAllocationMethod": "Dynamic",
+                            "subnet": {
+                                "id": "[resourceId(parameters('TargetRG'), 'Microsoft.Network/virtualNetworks/subnets', parameters('existingVirtualNetworkName'), parameters('newSubnetName'))]"
+                            },
+                            "publicIpAddress": {
+                                "id": "[parameters('publicIpAddressId')]"
+                            }
+                        }
+                    }
+                ],
+                "sku": {
+                    "name": "[parameters('sku')]",
+                    "tier": "[parameters('sku')]"
+                }
+            }
+        },
+        {
+            "apiVersion": "2019-04-01",
+            "type": "Microsoft.Network/virtualNetworks/subnets",
+            "name": "[concat(parameters('existingVirtualNetworkName'), '/', parameters('newSubnetName'))]",
+            "location": "[parameters('Resourcelocation')]",
+            "properties": {
+                "addressPrefix": "[parameters('subnetAddressPrefix')]"
+            }
+        }
+    ]
+}
