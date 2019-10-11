@@ -1,13 +1,4 @@
 ####################################################################
-#Script Name: Configure New subscription
-#Developed By: Jesús García Casanova
-#Department: Windows Systems
-#Version: 1.1.2
-#Purpose: Este script permite realizar la configuración inicial de una subscripción en Azure
-#Requeriments: Se solicitan al lanzar el script.
-#    - Password usuario máquina de test (usuario por defecto Patrol)
-#    - Credenciales para el envio de mail.
-####################################################################
 #Argumentos
 #Param ([String]$Subscription.Name,[String]$GatewaySubnet,[String]$NetworkAddress)
 

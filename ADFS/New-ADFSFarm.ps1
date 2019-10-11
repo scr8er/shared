@@ -1,4 +1,4 @@
-﻿Add-KdsRootKey –EffectiveTime (Get-Date) #.AddHours(-10)
+﻿Add-KdsRootKey –EffectiveTime (Get-Date) #.AddHours(-10) for testing environment
 # to do
 Import-Module ADFS
 

@@ -20,3 +20,14 @@ Get-psrepository
 Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
 Install-Module -Name Az -AllowClobber  # optional -scope CurrentUser
 ```
+
+Create useful PSObject to store specific information.
+```Powershell
+$PsObject = foreach ($Object in $ObjectList) {
+    [PSCustomObject]@{
+        Property1 = $object.Value1
+        Property2 = $object.Value2
+        Property3 = $object.Value3
+    }
+}
+```

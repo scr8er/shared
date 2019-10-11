@@ -38,7 +38,7 @@ $result = @{}
 $presult = @{}
 $translate = @{}
 $i = 0
-cls
+
 Write-host "El resultado se guardará en $pwd\Get-ActiveRPNames_Summary.txt" -ForegroundColor Green
 #Modificar Idioma para la consulta.
 $orgCulture = Get-Culture
@@ -49,7 +49,7 @@ foreach ($WinEvent in $WinEvents){
     $WEFilter = ($winevent.Message -replace "A token was successfully issued for the relying party ", "").split(" ",2) | select -first 1
     $check = $presult.keys | select-string -Pattern $WEFilter
     Write-Progress -Activity "Searching Events" -Status "Progress:" -PercentComplete ($i/$WinEvents.count*100)
-    if ($WEFilter -eq $null){
+    if ($null -eq $WEFilter ) {
         ($WinEvent.message).Split("'") | select-object -skip 1 -First 1
     }
     Else{
