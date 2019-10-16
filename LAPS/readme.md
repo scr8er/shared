@@ -1,7 +1,7 @@
 # LAPS Utilities
 
 Client script installation.
-```Powershell
+
 Test previous or succeeded installations.
 ```Powershell
 test-path "C:\Program Files\LAPS\CSE\Admpwd.dll"
