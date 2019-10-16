@@ -1,4 +1,5 @@
-Invoke-WebRequest "https://www.microsoft.com/en-us/download/confirmation.aspx?id=46899&6B49FDFB-8E5B-4B07-BC31-15695C5A2143=1" -OutFile c:\users\$env:USERNAME\Descargas
+# Server side
+Invoke-WebRequest "https://www.microsoft.com/en-us/download/confirmation.aspx?id=46899&6B49FDFB-8E5B-4B07-BC31-15695C5A2143=1" -OutFile "c:\users\$env:USERNAME\Descargas"
 Import-Module AdmPwd.PS
 Update-AdmPwdADSchema
 
@@ -25,3 +26,7 @@ Where-Object {
 }
 
 # increase laps log level
+HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\GPExtensions\{D76B9641-3288-4f75-942D-087DE603E3EA}\ExtensionDebugLevel
+# 0 (Default value) Silent mode (errors only) when no error occurs, no information is logged
+# 1 Log Errors and warnings
+# 2 Verbose mode, log everything
