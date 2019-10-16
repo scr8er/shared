@@ -20,5 +20,5 @@ msiexec.exe /q /i $MsiPath CUSTOMADMINNAME=$AdminUser 
 Rename Built-in Admin account.
 ```Powershell
 $BuiltinAdmin  = (gwmi -query "Select * From Win32_UserAccount Where LocalAccount = TRUE AND SID LIKE 'S-1-5%-500'")
-$BuiltinAdmin.rename("$nombre")
+$BuiltinAdmin.rename("$name")
 ```
