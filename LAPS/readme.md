@@ -1,6 +1,9 @@
 # LAPS Utilities
 
 Client script installation.
+```Powershell
+.\install-clientlaps.ps1  
+```
 
 Test previous or succeeded installations.
 ```Powershell
