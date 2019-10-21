@@ -1,6 +1,6 @@
 # Unified Naming Policies
 
-This policy enforces a custom name pattern for resources deployed in your environment. 
+This policy enforces a custom name pattern for resources deployed in your environment.
 
 ## Azure Policy Docs
 
@@ -15,9 +15,9 @@ https://github.com/scr8er/shared/blob/master/Azure/Policies/Unified%20Naming%20P
 
 ## Try with Azure PowerShell
 
-````powershell
+````PowerShell
 # Create the Policy Definition (Subscription scope)
-$definition = New-AzPolicyDefinition -Name 'AG_NamingPolicy' -DisplayName 'Unified naming Policies -description 'This policy enforces a custom name pattern' -Policy ''https://github.com/scr8er/shared/blob/master/Azure/Policies/Unified Naming Policies/azurepolicy.rules.json' -Parameter 'https://github.com/scr8er/shared/blob/master/Azure/Policies/Unified Naming Policies/azurepolicy.parameters.json' -Mode All
+$definition = New-AzPolicyDefinition -Name 'AG_NamingPolicy' -DisplayName 'Unified naming Policies -description 'This policy enforces a custom name pattern' -Policy 'https://github.com/scr8er/shared/blob/master/Azure/Policies/Unified Naming Policies/azurepolicy.rules.json' -Parameter 'https://github.com/scr8er/shared/blob/master/Azure/Policies/Unified Naming Policies/azurepolicy.parameters.json' -Mode All
 
 # Set the scope to a resource group; may also be a subscription or management group
 $scope = Get-AzResourceGroup -Name 'YourResourceGroup'
@@ -26,5 +26,5 @@ $scope = Get-AzResourceGroup -Name 'YourResourceGroup'
 $policyparam = '{ "namepattern": { "value": "NamePattern" } }'
 
 # Create the Policy Assignment
-$assignment = New-AzPolicyAssignment -Name 'allowed-custom-images-assignment' -DisplayName 'Approved VM images Assignment' -Scope $scope.ResourceId -PolicyDefinition $definition -PolicyParameter $policyparam
+$assignment = New-AzPolicyAssignment -Name 'Unified Naming Policies' -DisplayName 'Unified Naming Policies' -Scope $scope.ResourceId -PolicyDefinition $definition -PolicyParameter $policyparam
 ````
