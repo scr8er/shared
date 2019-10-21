@@ -10,3 +10,9 @@ Import-Module AdmPwd.PS
 # Crear los atributos de directorio activo, recomendado desde el controlador con el rol de maestro de esquema. (netdom query fsmo)
 Update-AdmPwdADSchema
 
+# Modificar el nivel de registro.
+New-ItemProperty -path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\GPExtensions\{D76B9641-3288-4f75-942D-087DE603E3EA}' -name "ExtensionDebugLevel" -Value 2 -PropertyType DWORD
+
+# Habilitar políticas de auditoría global y de auditoría de cambios.
+auditpol /set /subcategory:"directory service changes" /success:enable
+

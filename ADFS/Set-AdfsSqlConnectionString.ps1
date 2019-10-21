@@ -13,4 +13,4 @@ $temp.put()
 NET START adfssrv
 
 # Adfs artifact resolution Database connection string change.
-Set-AdfsProperties –artifactdbconnection ”data source=$Listener; initial catalog=adfsconfigurationV3; integrated security=true; connect timeout=25; MultiSubnetFailover=true”
+Set-AdfsProperties –artifactdbconnection ”data source=$Listener; initial catalog=AdfsArtifactStore; integrated security=true; connect timeout=25; MultiSubnetFailover=true”

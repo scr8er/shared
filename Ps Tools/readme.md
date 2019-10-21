@@ -31,3 +31,6 @@ $PsObject = foreach ($Object in $ObjectList) {
     }
 }
 ```
+
+#### Get-LocalAdmin
+https://gallery.technet.microsoft.com/Query-members-of-Local-d0f393a6/view/Discussions#content

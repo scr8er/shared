@@ -1,6 +1,25 @@
+# Parameters
+param (
+    [string]$gmsa = $( Read-Host "Group Managed Service Account Name" )
+)
+
+# Check allowed computer accounts
+$check = (Get-ADServiceAccount $gmsa -Properties PrincipalsAllowedToRetrieveManagedPassword).PrincipalsAllowedToRetrieveManagedPassword | Select-String $env:COMPUTERNAME
+If ($check) {
+    Write-Host "$env:COMPUTERNAME allowed to retrieve gMSA password"
+}
+else {
+    # Add new host with managed password retrieve permission.
+    Set-ADServiceAccount $gmsa -PrincipalsAllowedToRetrieveManagedPassword (Get-ADComputer $env:COMPUTERNAME).DistinguishedName
+    # Install gMSa
+    Get-ADServiceAccount -filter { name -eq $gmsa } | Install-ADServiceAccount
+}
+Test-ADServiceAccount $gmsa
+Read-Host "Pulsa cualquier tecla para continuar"
+
 # Enable audit
-set-AdfsProperties -auditlevel verbose
-Set-ADFSProperties -LogLevel Information, Errors, Verbose, Warnings, FailureAudits, SuccessAudits
+Set-AdfsProperties -auditlevel verbose
+Set-AdfsProperties -LogLevel Information, Errors, Verbose, Warnings, FailureAudits, SuccessAudits
 Set-AdfsProperties -EnableIdPInitiatedSignonPage $true
 auditpol.exe /set /subcategory:"Application generated" /failure:enable /success:enable
 
@@ -10,4 +29,4 @@ Import-Module ADFSToolbox -Force
 
 # Create diagnostics File
 Export-AdfsDiagnosticsFile
-start https://adfshelp.microsoft.com/DiagnosticsAnalyzer/Analyze
+start-process https://adfshelp.microsoft.com/DiagnosticsAnalyzer/Analyze
