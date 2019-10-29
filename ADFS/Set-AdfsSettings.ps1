@@ -3,6 +3,9 @@ param (
     [string]$gmsa = $( Read-Host "Group Managed Service Account Name" )
 )
 
+# Install AD module.
+Install-WindowsFeature RSAT-AD-PowerShell
+
 # Check allowed computer accounts
 $check = (Get-ADServiceAccount $gmsa -Properties PrincipalsAllowedToRetrieveManagedPassword).PrincipalsAllowedToRetrieveManagedPassword | Select-String $env:COMPUTERNAME
 If ($check) {
@@ -26,6 +29,15 @@ auditpol.exe /set /subcategory:"Application generated" /failure:enable /success:
 # Get ADFS diagnostics tool
 Install-Module -Name ADFSToolbox -Force
 Import-Module ADFSToolbox -Force
+
+# Disable Extranet Endpoints
+Set-AdfsProperties –EnableIdpInitiatedSignonPage $False
+
+Set-AdfsEndpoint -TargetAddressPath `
+    /adfs/services/trust/2005/windowstransport -Proxy $false
+
+Set-AdfsEndpoint -TargetAddressPath `
+    /adfs/services/trust/13/windowstransport -Proxy $false
 
 # Create diagnostics File
 Export-AdfsDiagnosticsFile
