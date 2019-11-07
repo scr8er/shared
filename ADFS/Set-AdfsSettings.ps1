@@ -23,7 +23,6 @@ Read-Host "Pulsa cualquier tecla para continuar"
 # Enable audit
 Set-AdfsProperties -auditlevel verbose
 Set-AdfsProperties -LogLevel Information, Errors, Verbose, Warnings, FailureAudits, SuccessAudits
-Set-AdfsProperties -EnableIdPInitiatedSignonPage $true
 auditpol.exe /set /subcategory:"Application generated" /failure:enable /success:enable
 
 # Get ADFS diagnostics tool
