@@ -1,15 +1,13 @@
 # Definición de constantes.
-[string]$NicNameSource = "e1000" # Tarjeta virtual obsoleta
+[string]$NICNameSource = @("e1000","Flexible","vmxnet","EnhancedVmxnet"); # Tarjeta virtual obsoleta
 [string]$NICNameTarget = "Vmxnet3" # Tarjeta virtual deseada
 [string]$HardwareVersionTarget = "vmx-13" # Versión objetivo de VMhardware.
-[version]$VmWareToolsTarget = "10.2.1" # Versión objetivo de VMTools
+[version]$VmWareToolsTarget = "11.0.0" # Versión objetivo de VMTools
 
-# Listado de máquinas para analizar.
-Clear-Variable ImportVMs, TestVM
-#$ImportVMs = Import-Csv ".\VMs-Outdated.csv"
-#$TestVM = $ImportVMs.VM_Name
-
-
+###################################################################### Listado de máquinas para analizar.
+Clear-Variable TestVM
+$TestVM = ""
+########################################################################################################
 function SDUpgradeVM {
     $VMList = foreach ($Name in $TestVM) {
         Get-VM -name $Name | Select-Object Name, PowerState, HardwareVersion, ExtensionData
@@ -34,16 +32,24 @@ function SDUpgradeVM {
             Write-Host "Sistema operativo:" $CheckOS -ForegroundColor Blue
         }
 
-        #Comprobaciones HWVersion, Tools y NIC.
+        # Excepciones
         [version]$Tools = (Get-VM $vm.name).guest.ToolsVersion
         if (($null -eq $Tools) -or ($Tools -eq "")) {
             Write-Host "`n`nNo existe ninguna versión de VmTools, no se realizarán acciones sobre" $Vm.Name -ForegroundColor Red
             Pause
             continue
         }
-        [string]$VMNic = (Get-VM $vm.name | Get-NetworkAdapter).type | Select-String $NicNameSource
+
+        #Comprobación de NIC
         $VmIPAddress = (Get-VM $vm.name).Guest.ipaddress
         $VmIPAddress
+        foreach ($NIC in $NICNameSource) {
+            if ((Get-VM $vm.name | Get-NetworkAdapter).type | Select-String $NIC) {
+                Write-Host "Es necesario actualizar drivers de la NIC a $NICNameTarget." -ForegroundColor Green
+                $CheckNIC = $true
+                break;
+            }
+        }
 
         #Comprobacion de HWVersion
         if ($Vm.HardwareVersion -notmatch $HardwareVersionTarget) {
@@ -57,11 +63,6 @@ function SDUpgradeVM {
             $CheckTools = $true
         }
 
-        #Comprobacion de NIC
-        if ($VMNic) {
-            Write-Host "Es necesario actualizar el driver de la NIC $VmNIC a $NICNameTarget." -ForegroundColor Green
-            $CheckNIC = $true
-        }
         If (-not(($checkHW) -or ($checkNIC) -or ($CheckTools))) {
             Write-Host "No se han detectado elementos para actualizar." -ForegroundColor Red
             continue
@@ -231,7 +232,8 @@ function SDUpgradeVM {
                     Write-Host "El SO que corre" $vm.ExtensionData.Guest.GuestFullName "es el mismo que el que esta configurado" $vm.ExtensionData.Config.GuestFullName -ForegroundColor Green
                 }
 
-                #Iniciar máquina virtual.
+                Write-Host "Iniciar máquina virtual."
+                Pause
                 Start-VM -VM $vm.Name
                 [int]$clock = 0
                 do {
@@ -257,14 +259,14 @@ function SDUpgradeVM {
                 # Alerta de estado de VM.
                 if ($clock -eq 5) {
                     # Notificar por mail si la máquina no inicia tras 5 minutos.
-                    $From = "sistemas_windows@securitasdirect.es";
-                    $To = "sistemas_windows@securitasdirect.es";
+                    $From = "";
+                    $To = "";
                     #$Cc = "jgcasanova@sidertia.com";
                     $MailSubject = "Revisar VM: $vmName"
                     $MailBody = "La maquina virtual $VmName con IP $VmIPAddress no se ha iniciado tras 5 minutos desde su actualizacion.";
                     $Body = $MailBody | Out-String;
                     #$Attachment = (Get-ChildItem WO*.log).Fullname;
-                    $SMTPServer = "smtprelay.securitasdirect.es";
+                    $SMTPServer = "smtprelay.";
                     $SMTPPort = "25";
                     Send-MailMessage -From $From -to $To -Subject $MailSubject -Body $Body -SmtpServer $SMTPServer -port $SMTPPort #-UseSsl -Credential $MailCredentials -Attachments $Attachment -ErrorAction Stop -Cc $Cc
                     Write-Host "La maquina" $vm.Name "no se ha iniciado tras 5 minutos, se ha generado un E-Mail de alerta para analizarse" -ForegroundColor Red
