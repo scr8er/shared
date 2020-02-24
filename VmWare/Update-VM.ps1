@@ -1,12 +1,13 @@
 # Definición de constantes.
-[string]$NICNameSource = @("e1000","Flexible","vmxnet","EnhancedVmxnet"); # Tarjeta virtual obsoleta
+[array]$NICNameSource = @("e1000","Flexible","vmxnet","EnhancedVmxnet"); # Tarjeta virtual obsoleta
 [string]$NICNameTarget = "Vmxnet3" # Tarjeta virtual deseada
 [string]$HardwareVersionTarget = "vmx-13" # Versión objetivo de VMhardware.
-[version]$VmWareToolsTarget = "11.0.0" # Versión objetivo de VMTools
+[version]$VmWareToolsTarget = "10.2.1" # Versión objetivo de VMTools
 
 ###################################################################### Listado de máquinas para analizar.
-Clear-Variable TestVM
-$TestVM = ""
+Clear-Variable TestVM, vm, vmNewConfig
+$TestVM = @("");
+
 ########################################################################################################
 function SDUpgradeVM {
     $VMList = foreach ($Name in $TestVM) {
@@ -20,13 +21,13 @@ function SDUpgradeVM {
         [bool]$CheckTools = $false
         [bool]$CheckNIC = $false
         [bool]$Status = $false
-        Clear-Variable Tools, VMNic, VmIPAddress, VmName, CheckOS, PowerStatus -ErrorAction Ignore
+        Clear-Variable Tools, VMNic, VmIPAddress, VmName, CheckOS, PowerStatus, $NIC -ErrorAction Ignore
 
         # Comprobación de SO
         [string]$CheckOS = (Get-VM -name $vm.name | Get-VMGuest).OSFullName
         If (-not($CheckOS | Select-String "Windows")) {
-            Write-Host "Sistema operativo:" $CheckOS "saltando a la siguiente maquina virtual"-ForegroundColor Blue
-            continue
+            Write-Host "Sistema operativo:" $CheckOS <#"saltando a la siguiente maquina virtual"#>-ForegroundColor Blue
+            #continue
         }
         else {
             Write-Host "Sistema operativo:" $CheckOS -ForegroundColor Blue
@@ -36,19 +37,23 @@ function SDUpgradeVM {
         [version]$Tools = (Get-VM $vm.name).guest.ToolsVersion
         if (($null -eq $Tools) -or ($Tools -eq "")) {
             Write-Host "`n`nNo existe ninguna versión de VmTools, no se realizarán acciones sobre" $Vm.Name -ForegroundColor Red
-            Pause
+            #Pause
             continue
         }
 
         #Comprobación de NIC
         $VmIPAddress = (Get-VM $vm.name).Guest.ipaddress
-        $VmIPAddress
+        [int]$NicCount = 0
         foreach ($NIC in $NICNameSource) {
             if ((Get-VM $vm.name | Get-NetworkAdapter).type | Select-String $NIC) {
-                Write-Host "Es necesario actualizar drivers de la NIC a $NICNameTarget." -ForegroundColor Green
+                $NicCount++
+                Write-Host "Tarjeta" $NIC "obsoleta detectada."
                 $CheckNIC = $true
-                break;
+                #break;
             }
+        }
+        if ($NicCount -gt 0) {
+            Write-Host "Es necesario actualizar drivers de $NicCount NIC a $NICNameTarget." -ForegroundColor Green
         }
 
         #Comprobacion de HWVersion
@@ -64,7 +69,7 @@ function SDUpgradeVM {
         }
 
         If (-not(($checkHW) -or ($checkNIC) -or ($CheckTools))) {
-            Write-Host "No se han detectado elementos para actualizar." -ForegroundColor Red
+            Write-Host "No se han detectado elementos para actualizar en" $Vm.name -ForegroundColor Yellow
             continue
         }
         else {
@@ -103,7 +108,7 @@ function SDUpgradeVM {
                     Write-Host "Habilitando actualización de versión de hardware al reiniciar." -ForegroundColor Green
                     $vmNewConfig.ScheduledHardwareUpgradeInfo = New-Object VMware.Vim.ScheduledHardwareUpgradeInfo
                     $vmNewConfig.ScheduledHardwareUpgradeInfo.UpgradePolicy = "always"
-                    $vmNewConfig.ScheduledHardwareUpgradeInfo.VersionKey = $hardwareVersion
+                    $vmNewConfig.ScheduledHardwareUpgradeInfo.VersionKey = $HardwareVersionTarget
                     $vmConfig.ReconfigVM($vmNewConfig)
                 }
 
@@ -142,7 +147,7 @@ function SDUpgradeVM {
 
                 # Consolidación de información de SO.
                 If ($vm.ExtensionData.Config.GuestFullName -notmatch $vm.ExtensionData.Guest.GuestFullName) {
-                    Write-Host "El SO" $vm.ExtensionData.Guest.GuestFullName "no es el mismo que el que esta configurado" $vm.ExtensionData.Config.GuestFullName -ForegroundColor Red
+                    Write-Host "El SO" $vm.ExtensionData.Guest.GuestFullName "no es el mismo que el que esta configurado" $vm.ExtensionData.Config.GuestFullName -ForegroundColor Blue
                     $vm.ExtensionData.Guest.GuestFullName
                     switch ($vm.ExtensionData.Guest.GuestFullName) {
                         "Oracle Linux 8 (64-bit)" {
@@ -232,9 +237,10 @@ function SDUpgradeVM {
                     Write-Host "El SO que corre" $vm.ExtensionData.Guest.GuestFullName "es el mismo que el que esta configurado" $vm.ExtensionData.Config.GuestFullName -ForegroundColor Green
                 }
 
-                Write-Host "Iniciar máquina virtual."
-                Pause
-                Start-VM -VM $vm.Name
+                #Iniciar máquina virtual y comprobaciones.
+                Write-Host "Iniciando máquina virtual."
+                #Pause
+                Start-VM -VM $vm.Name -Verbose
                 [int]$clock = 0
                 do {
                     if (-not($clock -eq 0)) {
@@ -255,24 +261,24 @@ function SDUpgradeVM {
                     $clock++
                 }
                 until (($status -eq "True") -or ($clock -eq 5))
-                Test-Connection $VmIPAddress
+                #Test-Connection $VmIPAddress
                 # Alerta de estado de VM.
                 if ($clock -eq 5) {
                     # Notificar por mail si la máquina no inicia tras 5 minutos.
                     $From = "";
                     $To = "";
-                    #$Cc = "jgcasanova@sidertia.com";
+                    #$Cc = "";
                     $MailSubject = "Revisar VM: $vmName"
-                    $MailBody = "La maquina virtual $VmName con IP $VmIPAddress no se ha iniciado tras 5 minutos desde su actualizacion.";
+                    $MailBody = "La maquina virtual $VmName con IP $VmIPAddress no se ha iniciado tras 5 minutos desde su actualizacion.`nVersión de hardware:$checkHW `nDriver de NIC:$checkNIC `nVersion de tools:$CheckTools";
                     $Body = $MailBody | Out-String;
                     #$Attachment = (Get-ChildItem WO*.log).Fullname;
-                    $SMTPServer = "smtprelay.";
+                    $SMTPServer = "";
                     $SMTPPort = "25";
                     Send-MailMessage -From $From -to $To -Subject $MailSubject -Body $Body -SmtpServer $SMTPServer -port $SMTPPort #-UseSsl -Credential $MailCredentials -Attachments $Attachment -ErrorAction Stop -Cc $Cc
                     Write-Host "La maquina" $vm.Name "no se ha iniciado tras 5 minutos, se ha generado un E-Mail de alerta para analizarse" -ForegroundColor Red
                 }
                 elseif ($clock -lt 5) {
-                    Write-Host La maquina $vm.Name esta encendida -ForegroundColor Blue
+                    Write-Host "La maquina" $vm.Name "esta encendida." -ForegroundColor Blue
                 }
             }
         }
